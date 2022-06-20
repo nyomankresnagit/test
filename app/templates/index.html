@@ -1,2 +1,19 @@
-<li><a class="button-base" href="{{ url_for('auth_bp.formLogin') }}">Rumah Sakit</a>
-  <li><a class="button-base" href="{{ url_for('transaksi.datatransaksi') }}">Perpustakaan</a>
+<html>
+<style>
+.imagebutton {
+  border-radius: 50%;
+  width:360px;
+  height:240px; 
+}
+</style>
+<table align="center" style="margin-top:150px">
+    <tr>
+        <th>APP RUMAH SAKIT</th>
+        <th>APP PERPUSTAKAAN</th>
+    </tr>
+    <tr>
+        <td><a href="{{ url_for('auth_bp.formLogin') }}"><img class="imagebutton" src="../static/images/hospital.jpg"></a></td>
+        <td><a href="{{ url_for('transaksi.datatransaksi') }}"><img class="imagebutton" src="../static/images/library.jpg" ></a></td>
+    </tr>
+</table>
+</html>
