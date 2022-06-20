@@ -81,7 +81,7 @@ def registerAdmin():
         db.session.add(newUser)
         db.session.commit()
         id = findAuth(username)
-        newAdmin = admin(id_auth=id, username=usernameAdmin, password=password, nama_admin=nama_admin, jabatan=jabatan, flag="Y", created_date=date, updated_date=date)
+        newAdmin = admins(id_auth=id, username=usernameAdmin, password=password, nama_admin=nama_admin, jabatan=jabatan, flag="Y", created_date=date, updated_date=date)
         db.session.add(newAdmin)
         db.session.commit()
         flash("Admin berhasil didaftarkan.")
