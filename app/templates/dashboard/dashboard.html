@@ -1,0 +1,111 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>Hospital</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}" />
+
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='bootstrap.css')}}"/>
+    <script src="{{url_for('static', filename='jquery.js')}}"></script>
+    <script src="{{url_for('static', filename='popper.js')}}"></script>
+    <script src="{{url_for('static', filename='bootstrapjs.js')}}"></script>
+
+    <script>
+      $(document).ready(function() {
+          var messages = "{{ get_flashed_messages() }}";
+    
+          if (typeof messages != 'undefined' && messages != '[]') {
+              $("#myModal").modal('show');
+          };
+
+          var status = "{{username.status_auth}}";
+          if(status == "dokter"){
+            document.getElementById("pasien").style.display = "none";
+            document.getElementById("admin").style.display = "none";
+            document.getElementById("master").style.display = "none";
+            document.getElementById("admin-dokter").style.display = "none";
+            document.getElementById("record-trans").style.display = "none";
+          } else if(status == "pasien"){
+            document.getElementById("admin").style.display = "none";
+            document.getElementById("record-trans").style.display = "none";
+            document.getElementById("master").style.display = "none";
+            document.getElementById("admin-dokter").style.display = "none";
+            document.getElementById("btn-admin-dokter").style.display = "none";
+            document.getElementById("dokter-check").style.display = "none";
+          } else if(status == "admin"){
+            document.getElementById("pasien").style.display = "none";
+            document.getElementById("dokter-check").style.display = "none";
+            document.getElementById("record-trans").style.display = "none";
+          }
+      });
+    </script>
+</head>  
+<body>
+  <h1 class="header">Simple Hospital</h1>
+  <div class="navbar-crud">
+    <a href="/home">Home</a>
+    <a href="/viewTrans" id="record-trans">Record Trans</a>
+    <div class="dropdown-crud" id="pasien">
+      <button class="dropbtn-crud">Pasien
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content-crud">
+        <a href="/showAvailableDokter">Book Dokter</a>
+        <a href="/viewForPasien" id="pasien">View Detail Book</a>
+      </div>
+    </div>
+    <div class="dropdown-crud">
+        <button class="dropbtn-crud" id="btn-admin-dokter">Dokter
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content-crud">
+          <a href="/showDokterInTrans" id="admin-dokter">Checking Dokter</a>
+          <a href="/viewForDokter" id="dokter-check">Checking</a>
+        </div>
+    </div>
+    <a href="/showPaymentList" id="admin">Payment</a>
+    <div class="dropdown-crud" id="master">
+      <button class="dropbtn-crud">Master
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content-crud">
+        <a href="/viewDokter">Master Dokter</a>
+        <a href="/viewPasien">Master Pasien</a>
+        <a href="/viewAdmin">Master Admin</a>
+      </div>
+    </div>
+    <a id="btn-logout" href="/logout">Logout</a>
+    <p id="username-dashboard">{{username.username}}</p>
+  </div>
+  <!-- MODAL -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content-handling">
+          <div class="modal-header-handling">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">CAUTION</h4>
+          </div>
+          <div class="modal-body-handling">
+              {% with messages = get_flashed_messages() %}
+              {% if messages %}
+              <ul class=flashes>
+                  {% for message in messages %}
+                  <li>{{ message }}</li>
+                  {% endfor %}
+              </ul>
+              {% endif %}
+              {% endwith %}
+          </div>
+          <div class="modal-footer-handling">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+
+  </div>
+</div>
+  {% block content %}
+  
+  {% endblock %}
+</body>  
+</html>

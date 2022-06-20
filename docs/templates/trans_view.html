@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>trans_view.py</title>
+  <link rel="stylesheet" href="pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>trans_view.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">app.trans</span> <span class="kn">import</span> <span class="n">trans_controller</span><span class="p">,</span> <span class="n">trans_bp</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      <p>This file work for routing function from the html to the controller file.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      <p>The function below work for routing function to viewTrans in the trans_controller using the blueprint connection.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="nd">@trans_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/viewTrans&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">viewTrans</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">trans_controller</span><span class="o">.</span><span class="n">viewTrans</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-3'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-3'>#</a>
+      </div>
+      <p>The function below work for routing function to searchTrans in the trans_controller using the blueprint connection.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="nd">@trans_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/searchTrans&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">searchTrans</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">trans_controller</span><span class="o">.</span><span class="n">searchTrans</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-4'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-4'>#</a>
+      </div>
+      <p>The function below work for routing function to showAvailableDokter in the trans_controller using the blueprint connection.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="nd">@trans_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/showAvailableDokter&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">showAvailableDokter</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">trans_controller</span><span class="o">.</span><span class="n">showAvailableDokter</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-5'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-5'>#</a>
+      </div>
+      <p>The function below work for routing function to bookDokter in the trans_controller using the blueprint connection.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="nd">@trans_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/bookDokter&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">bookDokter</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">trans_controller</span><span class="o">.</span><span class="n">bookDokter</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-6'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-6'>#</a>
+      </div>
+      <p>The function below work for routing function to saveDokterResult in the trans_controller using the blueprint connection.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="nd">@trans_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/saveDokterResult&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">saveDokterResult</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">trans_controller</span><span class="o">.</span><span class="n">saveDokterResult</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-7'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-7'>#</a>
+      </div>
+      <p>The function below work for routing function to payment in the trans_controller using the blueprint connection.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="nd">@trans_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/payment&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">payment</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">trans_controller</span><span class="o">.</span><span class="n">payment</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-8'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-8'>#</a>
+      </div>
+      <p>The function below work for routing function to showDokterInTrans in the trans_controller using the blueprint connection.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="nd">@trans_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/showDokterInTrans&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">showDokterInTrans</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">trans_controller</span><span class="o">.</span><span class="n">showDokterInTrans</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-9'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-9'>#</a>
+      </div>
+      <p>The function below work for routing function to searchDokterInTrans in the trans_controller using the blueprint connection.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="nd">@trans_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/searchDokterInTrans&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">searchDokterInTrans</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">trans_controller</span><span class="o">.</span><span class="n">searchDokterInTrans</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-10'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-10'>#</a>
+      </div>
+      <p>The function below work for routing function to searchAvailableDokter in the trans_controller using the blueprint connection.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="nd">@trans_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/searchAvailableDokter&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">searchAvailableDokter</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">trans_controller</span><span class="o">.</span><span class="n">searchAvailableDokter</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-11'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-11'>#</a>
+      </div>
+      <p>The function below work for routing function to showPaymentList in the trans_controller using the blueprint connection.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="nd">@trans_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/showPaymentList&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">showPaymentList</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">trans_controller</span><span class="o">.</span><span class="n">showPaymentList</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-12'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-12'>#</a>
+      </div>
+      <p>The function below work for routing function to savePayment in the trans_controller using the blueprint connection.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="nd">@trans_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/savePayment&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">savePayment</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">trans_controller</span><span class="o">.</span><span class="n">savePayment</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-13'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-13'>#</a>
+      </div>
+      <p>The function below work for routing function to searchPaymentList in the trans_controller using the blueprint connection.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="nd">@trans_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/searchPaymentList&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">searchPaymentList</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">trans_controller</span><span class="o">.</span><span class="n">searchPaymentList</span><span class="p">()</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

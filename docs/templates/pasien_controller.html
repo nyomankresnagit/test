@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>pasien_controller.py</title>
+  <link rel="stylesheet" href="pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>pasien_controller.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">app.pasien_history</span> <span class="kn">import</span> <span class="n">pasien_history_controller</span>
+<span class="kn">from</span> <span class="nn">app.pasien.pasien_model</span> <span class="kn">import</span> <span class="n">pasien</span>
+<span class="kn">from</span> <span class="nn">app.trans.trans_model</span> <span class="kn">import</span> <span class="n">trans</span>
+<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">pd</span><span class="p">,</span> <span class="n">BytesIO</span>
+<span class="kn">import</span> <span class="nn">datetime</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      <p>This file is work for setting the function</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      <p>The function below work for showing the active data on the database.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">viewPasien</span><span class="p">():</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">pasien</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pasien</span><span class="o">.</span><span class="n">flag</span><span class="o">==</span><span class="s2">&quot;Y&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;pasien/pasien.html&quot;</span><span class="p">,</span> <span class="n">datas</span><span class="o">=</span><span class="n">rows</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-3'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-3'>#</a>
+      </div>
+      <p>The function below work for adding data to the database.
+This function use form to get value form the website.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">addPasien</span><span class="p">():</span>
+    <span class="n">nama_pasien</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;namaPasien&quot;</span><span class="p">)</span>
+    <span class="n">alamat_pasien</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;alamatPasien&quot;</span><span class="p">)</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="n">created_date</span> <span class="o">=</span> <span class="n">date</span>
+    <span class="n">updated_date</span> <span class="o">=</span> <span class="n">date</span>
+    <span class="n">saveAdd</span> <span class="o">=</span> <span class="n">pasien</span><span class="p">(</span><span class="n">nama_pasien</span><span class="o">=</span><span class="n">nama_pasien</span><span class="p">,</span> <span class="n">alamat_pasien</span><span class="o">=</span><span class="n">alamat_pasien</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="n">status_diperiksa</span><span class="o">=</span><span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="n">created_date</span><span class="o">=</span><span class="n">created_date</span><span class="p">,</span> <span class="n">updated_date</span><span class="o">=</span><span class="n">updated_date</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">saveAdd</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Data Successfully Added.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;pasien_bp.viewPasien&#39;</span><span class="p">))</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-4'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-4'>#</a>
+      </div>
+      <p>The function belom work for update / edit data on the database.
+This function use form to get value form the website.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">editPasien</span><span class="p">(</span><span class="n">idPasien</span><span class="p">):</span>
+    <span class="n">nama_pasien</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;namaPasien&quot;</span><span class="p">)</span>
+    <span class="n">alamat_pasien</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;alamatPasien&quot;</span><span class="p">)</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="n">updated_date</span> <span class="o">=</span> <span class="n">date</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">checkDataPasien</span><span class="p">(</span><span class="n">idPasien</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;Ada&quot;</span> <span class="o">==</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Data Tidak dapat diupdate. Data Pasien sedang dalam Transaksi.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">saveEdit</span> <span class="o">=</span> <span class="n">pasien</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pasien</span><span class="o">.</span><span class="n">no_pasien</span> <span class="o">==</span> <span class="n">idPasien</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="n">pasien_history_controller</span><span class="o">.</span><span class="n">addPasienHistory</span><span class="p">(</span><span class="n">idPasien</span><span class="p">,</span> <span class="n">saveEdit</span><span class="o">.</span><span class="n">nama_pasien</span><span class="p">,</span> <span class="n">saveEdit</span><span class="o">.</span><span class="n">alamat_pasien</span><span class="p">,</span> <span class="n">updated_date</span><span class="p">)</span>
+        <span class="n">saveEdit</span><span class="o">.</span><span class="n">nama_pasien</span> <span class="o">=</span> <span class="n">nama_pasien</span>
+        <span class="n">saveEdit</span><span class="o">.</span><span class="n">alamat_pasien</span> <span class="o">=</span> <span class="n">alamat_pasien</span>
+        <span class="n">saveEdit</span><span class="o">.</span><span class="n">updated_date</span> <span class="o">=</span> <span class="n">updated_date</span>
+        <span class="n">saveEdit</span><span class="o">.</span><span class="n">flag</span> <span class="o">=</span> <span class="s2">&quot;Y&quot;</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Data Successfully Updated.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;pasien_bp.viewPasien&#39;</span><span class="p">))</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-5'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-5'>#</a>
+      </div>
+      <p>The function below work for change flag and didnt deleting data from the database, just change flag from &ldquo;Y&rdquo; to &ldquo;N&rdquo;
+This function using data id from the website.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">deletePasien</span><span class="p">(</span><span class="n">idPasien</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">checkDataPasien</span><span class="p">(</span><span class="n">idPasien</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;Ada&quot;</span> <span class="o">==</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Data Tidak dapat dihapus. Data Pasien sedang dalam Transaksi.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">saveEdit</span> <span class="o">=</span> <span class="n">pasien</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pasien</span><span class="o">.</span><span class="n">no_pasien</span><span class="o">==</span><span class="n">idPasien</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+        <span class="n">saveEdit</span><span class="o">.</span><span class="n">flag</span> <span class="o">=</span> <span class="s2">&quot;N&quot;</span>
+        <span class="n">saveEdit</span><span class="o">.</span><span class="n">updated_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;pasien_bp.viewPasien&#39;</span><span class="p">))</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-6'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-6'>#</a>
+      </div>
+      <p>The function below work for searching data from the website and showing active data from database.
+This function using form to get value from the website.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">searchPasien</span><span class="p">():</span>
+    <span class="n">idPasien</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;idPasien&quot;</span><span class="p">)</span>
+    <span class="n">namaPasien</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">ger</span><span class="p">(</span><span class="s2">&quot;namaPasien&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">idPasien</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">idPasien</span> <span class="o">=</span> <span class="s2">&quot;%&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">idPasien</span> <span class="o">=</span> <span class="n">idPasien</span>
+    <span class="k">if</span> <span class="n">namaPasien</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">namaPasien</span> <span class="o">=</span> <span class="s2">&quot;%&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">namaPasien</span> <span class="o">=</span> <span class="s2">&quot;%&quot;</span> <span class="o">+</span> <span class="n">namaPasien</span> <span class="o">+</span> <span class="s2">&quot;%&quot;</span>
+    <span class="n">searchPasien</span> <span class="o">=</span> <span class="n">pasien</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pasien</span><span class="o">.</span><span class="n">id_pasien</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="n">idPasien</span><span class="p">),</span> <span class="n">pasien</span><span class="o">.</span><span class="n">nama_pasien</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="n">namaPasien</span><span class="p">),</span> <span class="n">pasien</span><span class="o">.</span><span class="n">flag</span><span class="o">==</span><span class="s2">&quot;Y&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;pasien.html&quot;</span><span class="p">,</span> <span class="n">datas</span><span class="o">=</span><span class="n">rows</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-7'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-7'>#</a>
+      </div>
+      <p>The function below work for checking data from the database that has specified id.
+When data showing value Y, the status changed into Ada therefore status changed into Tidak when data showing N value.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">checkDataPasien</span><span class="p">(</span><span class="n">uid</span><span class="p">):</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">pasien</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pasien</span><span class="o">.</span><span class="n">no_pasien</span><span class="o">==</span><span class="n">uid</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">rows</span><span class="o">.</span><span class="n">status_diperiksa</span> <span class="o">==</span> <span class="s2">&quot;Y&quot;</span><span class="p">:</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Ada&quot;</span>
+    <span class="k">elif</span> <span class="n">rows</span><span class="o">.</span><span class="n">status_diperiksa</span> <span class="o">==</span> <span class="s2">&quot;N&quot;</span><span class="p">:</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Tidak&quot;</span>
+    <span class="k">return</span> <span class="n">status</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-8'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-8'>#</a>
+      </div>
+      <p>The function below work for import data from xlsx file and added data to the database.
+This function use xlsx file with predefined templates.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">importFilePasien</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]</span>
+        <span class="n">data_xls</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">created_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">updated_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_xls</span><span class="p">)):</span>
+            <span class="n">nama_pasien</span> <span class="o">=</span> <span class="n">data_xls</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">alamat_pasien</span> <span class="o">=</span> <span class="n">data_xls</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">saveAdd</span> <span class="o">=</span> <span class="n">pasien</span><span class="p">(</span><span class="n">nama_pasien</span><span class="o">=</span><span class="n">nama_pasien</span><span class="p">,</span> <span class="n">alamat_pasien</span><span class="o">=</span><span class="n">alamat_pasien</span><span class="p">,</span> <span class="n">status_diperiksa</span><span class="o">=</span><span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="n">created_date</span><span class="o">=</span><span class="n">created_date</span><span class="p">,</span> <span class="n">updated_date</span><span class="o">=</span><span class="n">updated_date</span><span class="p">)</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">saveAdd</span><span class="p">)</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;pasien_bp.viewPasien&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;pasien/pasien.html&quot;</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-9'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-9'>#</a>
+      </div>
+      <p>The function below work for export template for adding data to the database.
+This function export xlsx file.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">downloadTemplatePasien</span><span class="p">():</span>
+    <span class="n">df_1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Nama Pasien&#39;</span><span class="p">,</span> <span class="s1">&#39;Alamat Pasien&#39;</span><span class="p">,</span> <span class="p">])</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;xlsxwriter&#39;</span><span class="p">)</span>
+    <span class="n">df_1</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="s2">&quot;Sheet_1&quot;</span><span class="p">)</span>
+    <span class="n">workbook</span> <span class="o">=</span> <span class="n">writer</span><span class="o">.</span><span class="n">book</span>
+    <span class="n">worksheet</span> <span class="o">=</span> <span class="n">writer</span><span class="o">.</span><span class="n">sheets</span><span class="p">[</span><span class="s2">&quot;Sheet_1&quot;</span><span class="p">]</span>
+    <span class="nb">format</span> <span class="o">=</span> <span class="n">workbook</span><span class="o">.</span><span class="n">add_format</span><span class="p">()</span>
+    <span class="nb">format</span><span class="o">.</span><span class="n">set_bg_color</span><span class="p">(</span><span class="s1">&#39;#eeeeee&#39;</span><span class="p">)</span>
+    <span class="n">worksheet</span><span class="o">.</span><span class="n">set_column</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">send_file</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">attachment_filename</span><span class="o">=</span><span class="s2">&quot;Template_Pasien.xlsx&quot;</span><span class="p">,</span> <span class="n">as_attachment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>

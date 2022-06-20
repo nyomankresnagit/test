@@ -1,0 +1,26 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>Docs</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='pycco.css')}}" />
+</head>  
+<body>
+  
+  <div class="sidebar">
+    <div><a href="/">Home</a></div>
+    <div><a href="/dokter">Dokter</a></div>
+    <div><a href="/dokterHistory">Dokter History</a></div>
+    <div><a href="/pasien">Pasien</a></div>
+    <div><a href="/pasienHistory">Pasien History</a></div>
+    <div><a href="/trans">Trans</a></div>
+  </div>
+  
+  <div class="body-text">
+    <h1 class="header">Documents</h1>
+    {% block content %}
+    
+    {% endblock %}
+  </div>
+  
+</body>  
+</html>

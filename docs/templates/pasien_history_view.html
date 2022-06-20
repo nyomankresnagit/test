@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>pasien_history_view.py</title>
+  <link rel="stylesheet" href="pycco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div class='section'>
+    <div class='docs'><h1>pasien_history_view.py</h1></div>
+  </div>
+  <div class='clearall'>
+  <div class='section' id='section-0'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-0'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">app.pasien_history</span> <span class="kn">import</span> <span class="n">pasien_history_bp</span><span class="p">,</span> <span class="n">pasien_history_controller</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-1'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-1'>#</a>
+      </div>
+      <p>This file work for routing function from the html to the controller file.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-2'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-2'>#</a>
+      </div>
+      <p>The function below work for routing function to addPasienHistory in the pasien_history_controller using the blueprint connection.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="nd">@pasien_history_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/addPasienHistory&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">addPasienHistory</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">pasien_history_controller</span><span class="o">.</span><span class="n">addPasienHistory</span><span class="p">()</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-3'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-3'>#</a>
+      </div>
+      <p>The function below work for routing function to viewPasienHistory in the pasien_history_controller using the blueprint connection.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="nd">@pasien_history_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/viewPasienHistory&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">viewPasienHistory</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">pasien_history_controller</span><span class="o">.</span><span class="n">viewPasienHistory</span><span class="p">()</span>
+
+</pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+</div>
+</body>
