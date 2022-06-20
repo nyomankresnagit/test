@@ -2,10 +2,8 @@ from app.transaksi import bp_transaksi, transaksi_controller
 from app.auth.auth_controller import login_required
 from flask import render_template
 
-
-
 @bp_transaksi.route('/datatransaksi', methods=['GET', 'POST'])
-def index():
+def datatransaksi():
     return transaksi_controller.index()
 
 

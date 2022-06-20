@@ -21,13 +21,13 @@ from app.transaksi.transaksi_model import transaksi
 # Download Transaksi = CLEAR
 # Pengembalian Transaksi = CLEAR
 
-def index():
+def datatransaksi():
     transaksis = searchtransaksi()[0]
     cp = searchtransaksi()[1]
     cj = searchtransaksi()[2]
     cw1 = searchtransaksi()[3]
     cw2 = searchtransaksi()[4]
-    return render_template('transaksi/index.html', transaksis=transaksis, cp=cp, cj=cj, cw1=cw1, cw2=cw2)
+    return render_template('transaksi/datatransaksi.html', transaksis=transaksis, cp=cp, cj=cj, cw1=cw1, cw2=cw2)
 
 def searchtransaksi():
     cp = cj = cw1 = cw2 = ''
@@ -110,11 +110,11 @@ def tambahtransaksi():
             updateData.status = "dipinjam"
             db.session.commit()
             flash('Berhasil Menambah Transaksi', category="flash-ok")
-            return redirect(url_for('index'))
+            return redirect(url_for('transaksi.datatransaksi'))
             db.session.close()
 
     flash(messagetransaksi, category="flash-error")
-    return redirect(url_for('index'))
+    return redirect(url_for('transaksi.datatransaksi'))
 
 def get_transaksi(id):
     gettransaksi = transaksi.query.filter_by(id=id).first()
@@ -152,7 +152,7 @@ def updatetransaksi(id):
             updateDataTransaksi.flag = flag
             db.session.commit()
             flash('Buku Berhasil Dikembalikan', category="flash-ok")
-            return redirect(url_for('index'))
+            return redirect(url_for('transaksi.datatransaksi'))
             db.session.close()
 
         else:

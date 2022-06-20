@@ -9,3 +9,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 @login_required
 def dashboard():
     return render_template("dashboard/dashboard.html", username=current_user)
+
+@dashboard_bp.route('/')
+def index():
+    return render_template("index.html")

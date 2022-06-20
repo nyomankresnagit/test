@@ -55,7 +55,7 @@ def login():
         if not message:
             session.clear()
             session['admin_id'] = cekAdmin.id
-            return redirect(url_for('index'))
+            return redirect(url_for('transaksi.datatransaksi'))
 
         flash(message, category="flash-error")
 
@@ -73,7 +73,7 @@ def load_logged_in_user():
 # FUNGSI LOGOUT ADMIN
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    return redirect(url_for('transaksi.datatransaksi'))
 
 # FUNGSI MENAMPILKAN MENU APABILA TELAH LOGIN
 def login_required(view):
